@@ -33,39 +33,6 @@ function setupScreenSaver(){
   });
 }
 
-function resizeProjectImages(){
-  var $heightAdjust = 178
-
-  if ($('#category-listing').hasClass('active')) {
-    $heightAdjust = $heightAdjust + $('#category-listing').height() + 30;
-  }
-  $('article.cycle-slideshow.project-cycle').height($(window).height() - $heightAdjust - $('div#breadcrumbs').height());
-  $('.project-cycle img').each(function(){
-    $(this).css({
-      'marginLeft': -Math.floor($(this).width()/2)
-    });
-  });
-}
-
-function fbs_click() {u=location.href;t=document.title;window.open('http://www.facebook.com/sharer.php?u='+encodeURIComponent(u)+'&t='+encodeURIComponent(t),'sharer','toolbar=0,status=0,width=626,height=436'); return false;}
-
-var x = document.getElementsByTagName('a');
-for (var i=0;i<x.length;i++) {
-  if (x[i].getAttribute('type') == 'popup') {
-    x[i].onclick = function () {
-      return pop(this.href)
-      console.log('hi')
-    }
-    x[i].title += ' (Popup)';
-  }
-}
-
-function pop(url) {
-  newwindow=window.open(url,'name','height=256,width=570');
-  if (window.focus) {newwindow.focus()}
-    return false;
-}
-
 
 // remap jQuery to $
 (function($){
@@ -89,48 +56,6 @@ function pop(url) {
     } else {
       $('#slogan').css({ 'opacity': 0 });
       setupScreenSaver();
-    }
-    
-
-    $('.nav-categories').click(function(e){
-      e.preventDefault();
-
-      $('#nav-categories').addClass('active');
-
-      $('#category-listing').show();
-      $('#category-listing').addClass('active');
-      resizeProjectImages();
-    });
-
-    $('.cycle-slideshow').trigger('resize');
-
-    $(window).on("throttledresize", function(){
-      resizeProjectImages();
-    });
-
-    $('.project-cycle').imagesLoaded(function(){
-      resizeProjectImages();
-      $('.project-text.cycle-item').css({
-        visibility: 'hidden',
-        display:    'block'
-      });
-      $('#project-text-inner').css({ 'marginTop': -$('#project-text-inner').height()/2 });
-      $('.project-text.cycle-item').css({
-        visibility: 'visible',
-        display:    'none'
-      });
-      $('#cycle-cover').fadeOut();
-    });
-
-    $(document.documentElement).keyup(function (e) {
-      if (e.keyCode == 39)
-      {        
-       $('.project-cycle').cycle('next');
-     }
-
-     if (e.keyCode == 37)
-     {
-      $('.project-cycle').cycle('prev');
     }
 
   });
